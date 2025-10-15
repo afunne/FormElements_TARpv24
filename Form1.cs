@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -115,121 +115,259 @@ namespace FormElements
         }
         private void Tree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Text=="Nupp")
+            if (e.Node.Text == "Nupp")
             {
-                this.Controls.Add(btn);
-            }
-            else if (e.Node.Text== "Silt")
-            {
-                this.Controls.Add(lbl);
-            }
-            else if (e.Node.Text=="Pilt")
-            {
-                this.Controls.Add(pic);
-            }
-            else if (e.Node.Text == "Märkeruut")
-            {
-                c_btn1 = new CheckBox();
-                c_btn1.Text = "Vali mind";
-                c_btn1.Size = new Size(c_btn1.Text.Length * 9, 20);
-                c_btn1.Location = new Point(310, 420);
-                c_btn1.CheckedChanged += C_btn1_CheckedChanged;
-                c_btn2 = new CheckBox();
-                c_btn2.Size = new Size(100, 100);
-                c_btn2.Image = Image.FromFile(@"..\..\Images\about.png");
-                c_btn2.Location = new Point(310, 450);
-                this.Controls.Add(c_btn1);
-                this.Controls.Add(c_btn2);
-            }
-            else if (e.Node.Text == "Radionupp")
-            {
-                r_btn1 = new RadioButton();
-                r_btn1.Text = "Must teema";
-                r_btn1.Location = new Point(200, 420);
-                r_btn2 = new RadioButton();
-                r_btn2.Text = "Valge teema";
-                r_btn2.Location = new Point(200, 440);
-                this.Controls.Add(r_btn1);
-                this.Controls.Add(r_btn2);
-                r_btn1.CheckedChanged += new EventHandler(r_btn_Checked);
-                r_btn2.CheckedChanged += new EventHandler(r_btn_Checked);
-            }
-            else if (e.Node.Text== "MessageBox")
-            {
-                
-
-                MessageBox.Show("MessageBox", "Kõige lihtsam aken");
-                var answer = MessageBox.Show("Tahad InputBoxi näha?", "Aken koos nupudega", MessageBoxButtons.YesNo);
-                if (answer == DialogResult.Yes)
+                if (Controls.Contains(btn))
                 {
-                    string text = Interaction.InputBox("Sisesta siia mingi tekst", "InputBox", "Mingi tekst");
-                    if (MessageBox.Show("Kas tahad tekst saada Tekskastisse?", "Teksti salvestamine", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                    {   lbl.Text = text;
-                        Controls.Add(lbl);}
-                    else
-                    {   lbl.Text = "Siis mina lisan oma teksti!";
-                        Controls.Add(lbl);}
+                    Controls.Remove(btn);
+                    Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("Veel MessageBox", "Kõige lihtsam aken");
+                    Controls.Add(btn);
+                    btn.BringToFront();
                 }
             }
-            else if (e.Node.Text=="Kaart")
+            else if
+                (e.Node.Text == "Silt")
             {
-                tabC = new TabControl();
-                tabC.Location = new Point(450, 50);
-                tabC.Size = new Size(300, 200);
-                tabP1 = new TabPage("TTHK");
-                WebBrowser wb = new WebBrowser();
-                wb.Url=new Uri("https://www.tthk.ee/");
-                tabP1.Controls.Add(wb);
-                tabP2 = new TabPage("Teine");
-//Teeme ise!
-                tabP3 = new TabPage("+");
-                tabP3.DoubleClick += TabP3_DoubleClick;
-                tabC.Controls.Add(tabP1);
-                tabC.Controls.Add(tabP2);
-                tabC.Controls.Add(tabP3);
-                this.Controls.Add(tabC);
-                tabC.Selected += TabC_Selected;
-                tabC.DoubleClick += TabC_DoubleClick;
+                if(Controls.Contains(lbl))
+                {
+                    Controls.Remove(lbl);
+                    Refresh();
+                }
+                else
+                { Controls.Add(lbl);
+                    lbl.BringToFront();
+                }
             }
-            else if(e.Node.Text == "ListBox")
+            else if
+                (e.Node.Text == "Pilt")
             {
-                lb = new ListBox();
-                lb.Items.Add("Roheline");
-                lb.Items.Add("Punane");
-                lb.Items.Add("Sinine");
-                lb.Items.Add("Hall");
-                lb.Items.Add("Kollane");
-                lb.Location = new Point(150,120);
-                lb.SelectedIndexChanged += new EventHandler(ls_SelectedIndexChanged);
-                this.Controls.Add(lb);
+                if (Controls.Contains(pic))
+                {
+                    Controls.Remove(pic);
+                    Refresh();
+                }
+                else
+                {
+                    Controls.Add(pic);
+                    pic.BringToFront();
+                }
             }
-            else if (e.Node.Text == "DataGridView")
+            else if (e.Node.Text == "Märkeruut")
             {
-                DataSet ds = new DataSet("XML fail. Menüü");
-                ds.ReadXml(@"..\..\Images\menu.xml");
-                DataGridView dg = new DataGridView();
-                dg.Width = 400;
-                dg.Height = 160;
-                dg.Location = new Point(150,250);
-                dg.AutoGenerateColumns = true;
-                dg.DataSource = ds;
-                dg.DataMember = "food";
-                this.Controls.Add(dg);
+                if (c_btn1 != null && Controls.Contains(c_btn1))
+                {
+                    Controls.Remove(c_btn1);
+                    Controls.Remove(c_btn2);
+                    Refresh();
+                }
+                else
+                {
+                    c_btn1 = new CheckBox();
+                    c_btn1.Text = "Vali mind";
+                    c_btn1.Size = new Size(c_btn1.Text.Length * 9, 20);
+                    c_btn1.Location = new Point(310, 420);
+                    c_btn1.CheckedChanged += C_btn1_CheckedChanged;
+                    c_btn2 = new CheckBox();
+                    c_btn2.Size = new Size(100, 100);
+                    c_btn2.Image = Image.FromFile(@"..\..\Images\about.png");
+                    c_btn2.Location = new Point(310, 450);
+                    this.Controls.Add(c_btn1); this.Controls.Add(c_btn2);
+                }
             }
-            else if (e.Node.Text == "MainMenu")
+            else if (e.Node.Text == "Radionupp")
             {
-                MainMenu menu = new MainMenu();
-                MenuItem menuFile = new MenuItem("File");
-                menuFile.MenuItems.Add("Exit", new EventHandler(menuFile_Exit_Select));
-                menu.MenuItems.Add(menuFile);
-                this.Menu = menu;
-                //
+                if (r_btn1 != null && Controls.Contains(r_btn1))
+                {
+                    Controls.Remove(r_btn1); 
+                    Controls.Remove(r_btn2); Refresh(); 
+                }
+                else 
+                { 
+                    r_btn1 = new RadioButton(); 
+                    r_btn1.Text = "Must teema";
+                    r_btn1.Location = new Point(200, 420); 
+                    r_btn2 = new RadioButton(); 
+                    r_btn2.Text = "Valge teema"; 
+                    r_btn2.Location = new Point(200, 440);
+                    this.Controls.Add(r_btn1);
+                    this.Controls.Add(r_btn2);
+                    r_btn1.CheckedChanged += new EventHandler(r_btn_Checked);
+                    r_btn2.CheckedChanged += new EventHandler(r_btn_Checked);
+                }
+            } 
+            else if (e.Node.Text == "MessageBox") 
+            { 
+                MessageBox.Show("MessageBox", "Kõige lihtsam aken");
+                var answer = MessageBox.Show("Tahad InputBoxi näha?", "Aken koos nupudega", MessageBoxButtons.YesNo);
+                if (answer == DialogResult.Yes)
+                { 
+                    string text = Interaction.InputBox("Sisesta siia mingi tekst", "InputBox", "Mingi tekst");
+                    if (MessageBox.Show("Kas tahad tekst saada Tekskastisse?", "Teksti salvestamine", MessageBoxButtons.OKCancel) == DialogResult.OK) 
+                    { 
+                        lbl.Text = text; if (!Controls.Contains(lbl)) Controls.Add(lbl); 
+                    }
+                    else
+                    { 
+                        lbl.Text = "Siis mina lisan oma teksti!";
+                        if (!Controls.Contains(lbl)) Controls.Add(lbl); 
+                    } 
+                } 
+                else
+                {
+                    MessageBox.Show("Veel MessageBox", "Kõige lihtsam aken"); 
+                } 
+            } 
+            else if (e.Node.Text == "Kaart")
+            {
+                if (tabC != null && Controls.Contains(tabC))
+                {
+                    Controls.Remove(tabC); Refresh();
+                }
+                else
+                {
+                    tabC = new TabControl();
+                    tabC.Location = new Point(450, 50);
+                    tabC.Size = new Size(300, 200); 
+                    tabP1 = new TabPage("TTHK"); 
+                    WebBrowser wb = new WebBrowser(); 
+                    wb.Url = new Uri("https://www.tthk.ee/");
+                    tabP1.Controls.Add(wb); tabP2 = new TabPage("Teine");
+                    tabP3 = new TabPage("+");
+                    tabP3.DoubleClick += TabP3_DoubleClick; 
+                    tabC.Controls.Add(tabP1);
+                    tabC.Controls.Add(tabP2);
+                    tabC.Controls.Add(tabP3);
+                    this.Controls.Add(tabC);
+                    tabC.Selected += TabC_Selected; 
+                    tabC.DoubleClick += TabC_DoubleClick; 
+                } 
+            } 
+            else if (e.Node.Text == "ListBox") 
+            { 
+                if (lb != null && Controls.Contains(lb))
+                {
+                    Controls.Remove(lb); Refresh(); 
+                }
+                else 
+                { 
+                    lb = new ListBox();
+                    lb.Items.Add("Roheline"); 
+                    lb.Items.Add("Punane");
+                    lb.Items.Add("Sinine");
+                    lb.Items.Add("Hall"); 
+                    lb.Items.Add("Kollane");
+                    lb.Location = new Point(150, 120);
+                    lb.SelectedIndexChanged += new EventHandler(ls_SelectedIndexChanged);
+                    this.Controls.Add(lb);
+                } 
             }
+            else if (e.Node.Text == "DataGridView") 
+            {
+                Control existingGrid = Controls.OfType<DataGridView>().FirstOrDefault();
+                if (existingGrid != null) { Controls.Remove(existingGrid); 
+                    Refresh();
+                }
+                else 
+                {
+                    DataSet ds = new DataSet("XML fail. Menüü");
+                    ds.ReadXml(@"..\..\Images\menu.xml");
+                    DataGridView dg = new DataGridView();
+                    dg.Width = 400; dg.Height = 160;
+                    dg.Location = new Point(150, 250);
+                    dg.AutoGenerateColumns = true;
+                    dg.DataSource = ds; dg.DataMember = "food"; 
+                    this.Controls.Add(dg);
+                }
+            } 
+            else if (e.Node.Text == "MainMenu") 
+            { 
+                if (this.Menu != null)
+                {
+                    this.Menu = null; 
+                }
+                else
+                {
+                    MainMenu menu = new MainMenu();
+                    MenuItem menuFile = new MenuItem("File");
+                    menuFile.MenuItems.Add("Exit", new EventHandler(menuFile_Exit_Select));
+                    menu.MenuItems.Add(menuFile);
+                    this.Menu = menu; 
+                } 
+            } 
         }
+
+
+        //private void Tree_AfterSelect(object sender, TreeViewEventArgs e)
+        //{
+        //    switch (e.Node.Text)
+        //    {
+        //        case "Nupp":
+        //            ToggleControl(btn);
+        //            break;
+        //        case "Silt":
+        //            ToggleControl(lbl);
+        //            break;
+        //        case "Pilt":
+        //            ToggleControl(pic);
+        //            break;
+        //        case "Märkeruut":
+        //            if (c_btn1 != null && this.Controls.Contains(c_btn1))
+        //            {
+        //                this.Controls.Remove(c_btn1); this.Controls.Remove(c_btn2);
+        //            }
+        //            else
+        //            {
+        //                c_btn1 = new CheckBox();
+        //                c_btn1.Text = "Vali mind";
+        //                c_btn1.Size = new Size(c_btn1.Text.Length * 9, 20);
+        //                c_btn1.Location = new Point(310, 420);
+        //                c_btn1.CheckedChanged += C_btn1_CheckedChanged;
+        //                c_btn2 = new CheckBox();
+        //                c_btn2.Size = new Size(100, 100);
+        //                c_btn2.Image = Image.FromFile(@"..\..\Images\about.png");
+        //                c_btn2.Location = new Point(310, 450);
+        //                this.Controls.Add(c_btn1);
+        //                this.Controls.Add(c_btn2);
+        //            }
+        //            break;
+        //        case "Radionupp":
+        //            if (r_btn1 != null && this.Controls.Contains(r_btn1))
+        //            {
+        //                this.Controls.Remove(r_btn1); this.Controls.Remove(r_btn2);
+        //            }
+        //            else
+        //            {
+        //                r_btn1 = new RadioButton();
+        //                r_btn1.Text = "Must teema";
+        //                r_btn1.Location = new Point(200, 420);
+        //                r_btn2 = new RadioButton();
+        //                r_btn2.Text = "Valge teema";
+        //                r_btn2.Location = new Point(200, 440);
+        //                r_btn1.CheckedChanged += r_btn_Checked;
+        //                r_btn2.CheckedChanged += r_btn_Checked;
+        //                this.Controls.Add(r_btn1);
+        //                this.Controls.Add(r_btn2);
+        //            }
+        //            break;
+        //        case "ListBox":
+        //            if (lb != null && this.Controls.Contains(lb))
+        //            {
+        //                this.Controls.Remove(lb);
+        //            }
+        //            else
+        //            {
+        //                lb = new ListBox();
+        //                lb.Items.AddRange(new string[] { "Roheline", "Punane", "Sinine", "Hall", "Kollane" });
+        //                lb.Location = new Point(150, 120);
+        //                lb.SelectedIndexChanged += ls_SelectedIndexChanged;
+        //                this.Controls.Add(lb);
+        //            }
+        //            break;
+        //    }
+        //}
 
         private void menuFile_Exit_Select(object sender, EventArgs e)
         {
