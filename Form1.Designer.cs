@@ -1,7 +1,11 @@
-﻿namespace FormElements
+﻿using System;
+
+namespace FormElements
 {
     partial class Form1
     {
+
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -39,7 +43,11 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
