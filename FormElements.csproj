@@ -87,13 +87,15 @@
     <Content Include="Images\about.png" />
     <Content Include="Images\close_box_red.png" />
     <Content Include="Images\esimene.jpg" />
-    <Content Include="Images\menu.xml" />
-    <Content Include="Images\teine.jpg" />
     <Content Include="Images\kolmas.jpg" />
-    <Content Include="Sound\mixkit.wav" />
+    <Content Include="Images\teine.jpg" />
+    <Content Include="Sound\track2.wav" />
+    <Content Include="Sound\track3.wav" />
+    <Content Include="Sound\track1.wav" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
