@@ -95,7 +95,7 @@ namespace FormElements
             lb.Items.AddRange(new string[] { "Roheline", "Punane", "Sinine", "Hall", "Kollane" });
             lb.SelectedIndexChanged += Lb_SelectedIndexChanged;
 
-            // Small custom color button
+            // Small custom color button (WHY R U MISSPLACES WEK,FERPM,FPGERGFREPFPGE)
             btnCustomColor = new Button
             {
                 Text = "...",
@@ -110,40 +110,90 @@ namespace FormElements
                 Location = new Point(650, 60),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
-            try { pic.Image = Image.FromFile(@"..\\..\\Images\\close_box_red.png"); } catch { }
+            try
+            {
+                pic.Image = Image.FromFile(@"..\\..\\Images\\close_box_red.png");
+            }
+            catch { }
 
-            c_btn1 = new CheckBox { Text = "Pildi ääris (3D)", Location = new Point(200, 110) };
-            c_btn2 = new CheckBox { Text = "Näita pilti", Location = new Point(200, 140), Checked = true };
-            c_btn3 = new CheckBox { Text = "Näita silti", Location = new Point(200, 170), Checked = true };
-            c_btn4 = new CheckBox { Text = "Luba heli", Location = new Point(200, 200), Checked = true };
-            c_btn5 = new CheckBox { Text = "Pildi bounce (liigu aknas)", Location = new Point(200, 230) };
+            c_btn1 = new CheckBox
+            {
+                Text = "Pildi ääris (3D)", Location = new Point(200, 110)
+            };
+            c_btn2 = new CheckBox
+            {
+                Text = "Näita pilti", Location = new Point(200, 140), Checked = true
+            };
+            c_btn3 = new CheckBox
+            {
+                Text = "Näita silti", Location = new Point(200, 170), Checked = true
+            };
+            c_btn4 = new CheckBox
+            {
+                Text = "Luba heli", Location = new Point(200, 200), Checked = true
+            };
+            c_btn5 = new CheckBox
+            {
+                Text = "Pildi bounce (liigu aknas)", Location = new Point(200, 230)
+            };
 
-            r_btn1 = new RadioButton { Text = "Tume teema", Location = new Point(20, 220) };
-            r_btn2 = new RadioButton { Text = "Hele teema", Location = new Point(20, 250) };
-            r_btn3 = new RadioButton { Text = "Sinine teema", Location = new Point(20, 280) };
+            r_btn1 = new RadioButton
+            {
+                Text = "Tume teema", Location = new Point(20, 220)
+            };
+            r_btn2 = new RadioButton
+            {
+                Text = "Hele teema", Location = new Point(20, 250)
+            };
+            r_btn3 = new RadioButton
+            {
+                Text = "Sinine teema", Location = new Point(20, 280)
+            };
 
-            tabC = new TabControl { Location = new Point(360, 220), Size = new Size(480, 320) };
+            tabC = new TabControl
+            {
+                Location = new Point(360, 220), Size = new Size(480, 320)
+            };
 
             // Initial tab with RichTextBox
             tabP1 = new TabPage("Märkmik");
-            Panel panel1 = new Panel { Dock = DockStyle.Fill };
-            RichTextBox sheet1 = new RichTextBox { Dock = DockStyle.Fill, Text = "Siia saad kirjutada..." };
+            Panel panel1 = new Panel
+            {
+                Dock = DockStyle.Fill
+            };
+            RichTextBox sheet1 = new RichTextBox
+            {
+                Dock = DockStyle.Fill, Text = "Siia saad kirjutada..."
+            };
             panel1.Controls.Add(sheet1);
             tabP1.Controls.Add(panel1);
 
             tabP2 = new TabPage("Info");
-            Label info = new Label { Text = "See on informatsiooni kaart.", Location = new Point(10, 10), AutoSize = true };
-            PictureBox tabPic = new PictureBox { Size = new Size(100, 100), Location = new Point(10, 40), SizeMode = PictureBoxSizeMode.StretchImage };
-            try { tabPic.Image = Image.FromFile(@"..\\..\\Images\\about.png"); } catch { }
+            Label info = new Label
+            {
+                Text = "See on informatsiooni kaart.", Location = new Point(10, 10), AutoSize = true
+            };
+            PictureBox tabPic = new PictureBox
+            { 
+               Size = new Size(100, 100),Location = new Point(10, 40), SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            try
+            {
+                tabPic.Image = Image.FromFile(@"..\\..\\Images\\about.png");
+            }
+            catch { }
+
             tabP2.Controls.Add(info);
             tabP2.Controls.Add(tabPic);
 
             tabP3 = new TabPage("+");
             tabP3.DoubleClick += TabP3_DoubleClick;
 
-            tabC.TabPages.AddRange(new TabPage[] { tabP1, tabP2, tabP3 });
+            tabC.TabPages.AddRange(new TabPage[]
+            { tabP1, tabP2, tabP3 });
 
-            this.Controls.AddRange(new Control[] { lbl, btn, pic, lb, btnCustomColor, c_btn1, c_btn2, c_btn3, c_btn4, c_btn5, r_btn1, r_btn2, r_btn3, tabC, saveMainBtn });
+            this.Controls.AddRange(new Control[]
+            { lbl, btn, pic, lb, btnCustomColor, c_btn1, c_btn2, c_btn3, c_btn4, c_btn5, r_btn1, r_btn2, r_btn3, tabC, saveMainBtn });
         }
 
         private void InitializeEvents()
@@ -162,7 +212,8 @@ namespace FormElements
 
             c_btn4.CheckedChanged += (s, e) =>
             {
-                if (!c_btn4.Checked) foreach (var track in tracks) track?.Stop();
+                if (!c_btn4.Checked)
+                    foreach (var track in tracks) track?.Stop();
                 else PlaySelectedTrack();
             };
 
@@ -248,7 +299,10 @@ namespace FormElements
                     ofd.Title = "Vali pilt";
                     if (ofd.ShowDialog() == DialogResult.OK)
                     {
-                        try { pic.Image = Image.FromFile(ofd.FileName); } catch { MessageBox.Show("Pilti ei saanud avada.", "Error"); }
+                        try
+                        {
+                            pic.Image = Image.FromFile(ofd.FileName);
+                        } catch { MessageBox.Show("Pilti ei saanud avada.", "Error"); }
                     }
                 }
             }
@@ -272,11 +326,21 @@ namespace FormElements
 
             switch (selected)
             {
-                case "Roheline": this.BackColor = Color.LightGreen; break;
-                case "Punane": this.BackColor = Color.LightCoral; break;
-                case "Sinine": this.BackColor = Color.LightBlue; break;
-                case "Hall": this.BackColor = Color.LightGray; break;
-                case "Kollane": this.BackColor = Color.LightYellow; break;
+                case "Roheline":
+                    this.BackColor = Color.LightGreen;
+                    break;
+                case "Punane":
+                    this.BackColor = Color.LightCoral;
+                    break;
+                case "Sinine":
+                    this.BackColor = Color.LightBlue;
+                    break;
+                case "Hall":
+                    this.BackColor = Color.LightGray;
+                    break;
+                case "Kollane":
+                    this.BackColor = Color.LightYellow;
+                    break;
                 default:
                     if (selected.StartsWith("RGB(") && selected.EndsWith(")"))
                     {
@@ -310,7 +374,17 @@ namespace FormElements
             }
         }
 
-        private void C_btn1_CheckedChanged(object sender, EventArgs e) => pic.BorderStyle = c_btn1.Checked ? BorderStyle.Fixed3D : BorderStyle.None;
+        private void C_btn1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c_btn1.Checked)
+            {
+                pic.BorderStyle = BorderStyle.Fixed3D;
+            }
+            else
+            {
+                pic.BorderStyle = BorderStyle.None;
+            }
+        }
         private void C_btn5_CheckedChanged(object sender, EventArgs e) => bounceTimer.Enabled = c_btn5.Checked;
 
         private void BounceTimer_Tick(object sender, EventArgs e)
@@ -318,18 +392,27 @@ namespace FormElements
             pic.Left += dx;
             pic.Top += dy;
 
-            if (pic.Right >= this.ClientSize.Width || pic.Left <= 0) dx = -dx;
-            if (pic.Bottom >= this.ClientSize.Height || pic.Top <= 0) dy = -dy;
+            if (pic.Right >= this.ClientSize.Width || pic.Left <= 0)
+                dx = -dx;
+            if (pic.Bottom >= this.ClientSize.Height || pic.Top <= 0)
+                dy = -dy;
         }
 
-        private void TabC_Selected(object sender, TabControlEventArgs e) { if (e.TabPage == tabP3) AddNewTab(); }
+        private void TabC_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == tabP3)
+                AddNewTab(); 
+        }
         private void TabP3_DoubleClick(object sender, EventArgs e) => AddNewTab();
 
         private void AddNewTab()
         {
             TabPage newTab = new TabPage("Sheet " + (tabC.TabCount));
             Panel panel = new Panel { Dock = DockStyle.Fill };
-            RichTextBox sheet = new RichTextBox { Dock = DockStyle.Fill, Text = "Uus leht..." };
+            RichTextBox sheet = new RichTextBox
+            { 
+                Dock = DockStyle.Fill, Text = "Uus leht..." 
+            };
             panel.Controls.Add(sheet);
             newTab.Controls.Add(panel);
             tabC.TabPages.Insert(tabC.TabCount - 1, newTab);
@@ -338,15 +421,20 @@ namespace FormElements
         private void SaveMainBtn_Click(object sender, EventArgs e)
         {
             TabPage currentTab = tabC.SelectedTab;
-            if (currentTab == null) return;
+            if (currentTab == null)
+                return;
 
             RichTextBox sheet = null;
-            foreach (Control c in currentTab.Controls)
+            foreach(Control c in currentTab.Controls)
             {
                 if (c is Panel panel)
                 {
                     foreach (Control pc in panel.Controls)
-                        if (pc is RichTextBox rtb) { sheet = rtb; break; }
+                        if (pc is RichTextBox rtb)
+                        {
+                            sheet = rtb;
+                            break;
+                        }
                 }
                 else if (c is RichTextBox rtb)
                 {
@@ -355,7 +443,11 @@ namespace FormElements
                 }
             }
 
-            if (sheet == null) { MessageBox.Show("No sheet found in this tab.", "Error"); return; }
+            if (sheet == null)
+            {
+                MessageBox.Show("No sheet found in this tab.", "Error");
+                return;
+            }
 
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
@@ -365,26 +457,43 @@ namespace FormElements
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    try { System.IO.File.WriteAllText(sfd.FileName, sheet.Text); MessageBox.Show("File saved successfully!", "Saved"); }
-                    catch (Exception ex) { MessageBox.Show("Error saving file: " + ex.Message, "Error"); }
+                    try {
+                        System.IO.File.WriteAllText(sfd.FileName, sheet.Text);
+                        MessageBox.Show("File saved successfully!", "Saved");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error saving file: " + ex.Message, "Error"); 
+                    }
                 }
             }
         }
 
         private void ThemeRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (r_btn1.Checked) ApplyTheme("Dark");
-            else if (r_btn2.Checked) ApplyTheme("Light");
-            else if (r_btn3.Checked) ApplyTheme("Blue");
+            if (r_btn1.Checked)
+                ApplyTheme("Dark");
+
+            else if (r_btn2.Checked)
+                ApplyTheme("Light");
+
+            else if (r_btn3.Checked)
+                ApplyTheme("Blue");
         }
 
         private void ApplyTheme(string theme)
         {
             switch (theme)
             {
-                case "Dark": this.BackColor = Color.FromArgb(30, 30, 30); SetForeColor(Color.White); break;
-                case "Light": this.BackColor = Color.White; SetForeColor(Color.Black); break;
-                case "Blue": this.BackColor = Color.LightBlue; SetForeColor(Color.DarkBlue); break;
+                case "Dark":
+                    this.BackColor = Color.FromArgb(30, 30, 30); SetForeColor(Color.White);
+                    break;
+                case "Light":
+                    this.BackColor = Color.White; SetForeColor(Color.Black);
+                    break;
+                case "Blue":
+                    this.BackColor = Color.LightBlue; SetForeColor(Color.DarkBlue);
+                    break;
             }
         }
 
@@ -392,7 +501,8 @@ namespace FormElements
         {
             foreach (Control ctrl in this.Controls)
             {
-                if (!(ctrl is PictureBox)) ctrl.ForeColor = fore;
+                if (!(ctrl is PictureBox))
+                    ctrl.ForeColor = fore;
                 if (ctrl is TabControl tabC)
                 {
                     foreach (TabPage tab in tabC.TabPages)
